@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 
 const Header = props => {
   const { branding } = props;
+
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark bg-danger mb-3 py-0">
+    <nav
+      style={{ background: 'SlateBlue' }}
+      className="navbar navbar-expand-sm navbar-dark  mb-3 py-0"
+    >
       <div className="container">
         <a href="/" className="navbar-brand">
           {branding}

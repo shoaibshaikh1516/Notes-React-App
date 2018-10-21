@@ -21,4 +21,10 @@ class Contact extends Component {
   }
 }
 
+Contact.defaultProps = {
+  name: 'User',
+  email: 'Nil',
+  phone: 'Nil',
+};
+
 export default Contact;

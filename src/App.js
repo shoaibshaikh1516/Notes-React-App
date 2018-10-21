@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header branding="Notes" />
+        <Header branding="CLNotes" />
         <div className="container">
           <Contacts />
         </div>

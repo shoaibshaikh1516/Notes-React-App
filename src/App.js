@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Contact from './components/Contact';
+import Contacts from './components/Contacts';
 import Header from './components/Header';
 
 class App extends Component {
@@ -9,12 +9,7 @@ class App extends Component {
       <div className="App">
         <Header branding="Notes" />
         <div className="container">
-          <Contact name="Shyam" email="shyam@gmail.com" phone="333-333-555" />
-          <Contact
-            name="Shoaib"
-            email="shoaibshaikh@gmail.com"
-            phone="777-777-777"
-          />
+          <Contacts />
         </div>
       </div>
     );

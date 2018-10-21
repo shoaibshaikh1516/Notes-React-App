@@ -27,9 +27,7 @@ class Contacts extends Component {
         {contacts.map(contact => (
           <Contact
             key={contact.id}
-            name={contact.name}
-            phone={contact.phone}
-            email={contact.email}
+            contact={contact} // passing entire object
           />
         ))}
       </div>

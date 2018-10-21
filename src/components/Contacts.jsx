@@ -7,11 +7,13 @@ class Contacts extends Component {
     this.state = {
       contacts: [
         {
+          id: 1,
           name: 'Shyam',
           email: 'shyam@gmail.com',
           phone: '333-333-555',
         },
         {
+          id: 2,
           name: 'Shoaib',
           email: 'shoaib@gmail.com',
           phone: '777-777-777',
@@ -26,6 +28,7 @@ class Contacts extends Component {
       <div>
         {contacts.map(contact => (
           <Contact
+            key={contact.id}
             name={contact.name}
             phone={contact.phone}
             email={contact.email}

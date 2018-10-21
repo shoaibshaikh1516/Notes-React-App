@@ -30,7 +30,7 @@ Contact.defaultProps = {
 
 Contact.propTypes = {
   name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired, //may be check this in future replace string with obj
   phone: PropTypes.string.isRequired,
 };
 

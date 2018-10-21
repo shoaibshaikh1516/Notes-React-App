@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import './Header.css';
 
 const Header = props => {
   const { branding } = props;
 
   return (
     <nav
-      style={{ background: 'SlateBlue' }}
-      className="navbar navbar-expand-sm navbar-dark  mb-3 py-0"
+      style={headingStyles}
+      className="navbar navbar-expand-sm navbar-dark mb-3 py-0 sb"
     >
       <div className="container">
         <a href="/" className="navbar-brand">
@@ -34,6 +33,10 @@ Header.defaultProps = {
 
 Header.propTypes = {
   branding: PropTypes.string.isRequired,
+};
+
+const headingStyles = {
+  background: '#6a10b4',
 };
 
 export default Header;

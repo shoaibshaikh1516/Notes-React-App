@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Contact extends Component {
   state = {
-    showContactInfo: true,
+    showContactInfo: false,
   };
 
   onDeleteClick = () => {

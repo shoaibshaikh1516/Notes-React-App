@@ -3,13 +3,7 @@ import Contact from './Contact';
 import { Consumer } from '../context';
 
 class Contacts extends Component {
-  deleteContact = id => {
-    const { contacts } = this.state;
-
-    const newContacts = contacts.filter(contact => contact.id !== id);
-
-    this.setState({ contacts: newContacts });
-  };
+  //As this going to be handled in context
 
   render() {
     return (
@@ -18,11 +12,11 @@ class Contacts extends Component {
           const { contacts } = value;
           return (
             <React.Fragment>
-              {value.contacts.map(contact => (
+              {contacts.map(contact => (
                 <Contact
                   key={contact.id}
                   contact={contact} // passing entire object
-                  deleteClickHandler={this.deleteContact.bind(this, contact.id)}
+                  //As this going to be handled in context
                 />
               ))}
             </React.Fragment>

@@ -1,21 +1,30 @@
 import React, { Component } from 'react';
 
 class AddContact extends Component {
-  state = {
-    name: '',
-    email: '',
-    phone: '',
-  };
-
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  constructor(props) {
+    super(props);
+    this.nameInput = React.createRef();
+    this.emailInput = React.createRef();
+    this.phoneInput = React.createRef();
+  }
 
   onSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    const contact = {
+      name: this.nameInput.current.value,
+      email: this.emailInput.current.value,
+      phone: this.phoneInput.current.value,
+    };
+    console.log(contact);
   };
 
+  static defaultProps = {
+    name: 'Fred Smith',
+    email: 's@yahoo.com',
+    phone: '777-777-777',
+  };
   render() {
-    const { name, email, phone } = this.state;
+    const { name, email, phone } = this.props;
 
     return (
       <div className="card mb-3">
@@ -29,8 +38,8 @@ class AddContact extends Component {
                 name="name"
                 className="form-control form-control-lg"
                 placeholder="Enter name..."
-                value={name}
-                onChange={this.onChange}
+                defaultValue={name}
+                ref={this.nameInput}
               />
             </div>
 
@@ -41,8 +50,8 @@ class AddContact extends Component {
                 name="email"
                 className="form-control form-control-lg"
                 placeholder="Enter Email..."
-                value={email}
-                onChange={this.onChange}
+                defaultValue={email}
+                ref={this.emailInput}
               />
             </div>
             <div className="form-group">
@@ -52,14 +61,15 @@ class AddContact extends Component {
                 name="phone"
                 className="form-control form-control-lg"
                 placeholder="Enter Phone..."
-                value={phone}
-                onChange={this.onChange}
+                defaultValue={phone}
+                ref={this.phoneInput}
               />
             </div>
 
             <input
               type="submit"
               value="Add Contact"
+              // style={{ background: '#F2F5F8' }}
               className="btn btn-light btn-block"
             />
           </form>

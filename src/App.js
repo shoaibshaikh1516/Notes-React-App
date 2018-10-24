@@ -5,6 +5,7 @@ import Contacts from './components/contacts/Contacts';
 import Header from './components/layout/Header';
 import About from './components/pages/About';
 import AddContact from './components/contacts/AddContact';
+import { Link } from 'react-router-dom';
 
 import { Provider } from './context';
 
@@ -21,6 +22,14 @@ class App extends Component {
                 <Route exact path="/contact/add" component={AddContact} />
                 <Route exact path="/about" component={About} />
               </Switch>
+
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <Link to="/" className="nav-link">
+                    <i className="fas fa-home my-float" /> Home
+                  </Link>
+                </li>{' '}
+              </ul>
             </div>
           </div>
         </Router>

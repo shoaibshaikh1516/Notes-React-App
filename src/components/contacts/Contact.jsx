@@ -7,10 +7,10 @@ class Contact extends Component {
     showContactInfo: false,
   };
 
-  onDeleteClick = (id, dispatch) => {
-    axios
-      .delete(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then(res => dispatch({ type: 'DELETE_CONTACT', payload: id }));
+  onDeleteClick = async (id, dispatch) => {
+    axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+    //no need to use res obj as we are not getting any thing  back | ref get call
+    dispatch({ type: 'DELETE_CONTACT', payload: id });
   };
 
   render() {

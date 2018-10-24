@@ -2,15 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Consumer } from '../../context';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 class Contact extends Component {
   state = {
     showContactInfo: false,
   };
 
   onDeleteClick = async (id, dispatch) => {
-    axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
-    //no need to use res obj as we are not getting any thing  back | ref get call
-    dispatch({ type: 'DELETE_CONTACT', payload: id });
+    try {
+      await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+      //no need to use res obj as we are not getting any thing  back | ref get call
+      dispatch({ type: 'DELETE_CONTACT', payload: id });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   render() {
@@ -45,6 +51,18 @@ class Contact extends Component {
                   }}
                   onClick={this.onDeleteClick.bind(this, id, dispatch)}
                 />
+
+                <Link to={`contact/edit/${id}`}>
+                  <i
+                    className="fas fa-pencil-alt"
+                    style={{
+                      color: 'black',
+                      cursor: 'pointer',
+                      float: 'right',
+                      marginRight: '1rem',
+                    }}
+                  />
+                </Link>
               </h4>
 
               {showContactInfo ? (

@@ -24,10 +24,14 @@ const Header = props => {
 
             <li className="nav-item">
               <Link to="/contact/add" className="nav-link">
-                <i className="fas fa-plus" /> Add
+                <i className="fas fa-plus" /> Add Contact
               </Link>
             </li>
-
+            <li className="nav-item">
+              <Link to="/note/add" className="nav-link">
+                <i className="fas fa-plus" /> Add Note
+              </Link>
+            </li>
             <li className="nav-item">
               <Link to="/about" className="nav-link">
                 <i className="fas fa-users" />

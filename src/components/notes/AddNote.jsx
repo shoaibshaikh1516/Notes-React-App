@@ -84,8 +84,7 @@ class AddNote extends Component {
                     onChange={this.onChange}
                     error={errors.title}
                   />
-
-                  <TextInputGroup
+                  {/* <TextInputGroup
                     label="body"
                     name="body"
                     type="body"
@@ -93,19 +92,12 @@ class AddNote extends Component {
                     value={body}
                     onChange={this.onChange}
                     error={errors.body}
-                  />
-
-                  {/* <TextInputGroup
-                    label="userid"
-                    name="userid"
-                    placeholder="Enter userid"
-                    value={userid}
-                    onChange={this.onChange}
-                    error={errors.userid}
                   /> */}
+                  <label htmlFor={body}> body</label>
+
                   <Editor
                     apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
-                    initialValue="<p>This is the initial content of the editor</p>"
+                    initialValue={this.state.body}
                     init={{
                       plugins: 'link image code',
                       toolbar:

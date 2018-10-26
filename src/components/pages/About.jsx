@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './Login';
 
 export default props => {
   return (
@@ -6,6 +7,7 @@ export default props => {
       <h1 className="display-4">About CLNotes</h1>
       <p className="lead">Simple App to manage</p>
       <p className="text-secondary">Version 1.0.0</p>
+      <Login />
     </div>
   );
 };

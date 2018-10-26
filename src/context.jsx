@@ -12,12 +12,22 @@ const reducer = (state, action) => {
           Contact => Contact.id !== action.payload
         ),
       };
+
+    case 'DELETE_NOTE':
+      return {
+        ...state,
+        notes: state.notes.filter(Note => Note.id !== action.payload),
+      };
     case 'ADD_CONTACT':
       return {
         ...state,
         contacts: [action.payload, ...state.contacts],
       };
-
+    case 'ADD_NOTE':
+      return {
+        ...state,
+        notes: [action.payload, ...state.notes],
+      };
     case 'UPDATE_CONTACT':
       return {
         ...state,
@@ -36,14 +46,17 @@ const reducer = (state, action) => {
 export class Provider extends Component {
   state = {
     contacts: [],
-
+    notes: [],
     dispatch: action => this.setState(state => reducer(state, action)),
   };
 
   async componentDidMount() {
     const res = await axios.get('https://jsonplaceholder.typicode.com/users');
+    const resNotes = await axios.get('http://localhost:8080/api/note');
 
     this.setState({ contacts: res.data });
+
+    this.setState({ notes: resNotes.data });
   }
 
   render() {

@@ -2,70 +2,77 @@ import React, { Component } from 'react';
 import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
 import axios from 'axios';
-import { Editor } from '@tinymce/tinymce-react';
 
-class AddNote extends Component {
+class EditNote extends Component {
   state = {
     title: '',
     body: '',
-    userid: '',
+    phone: '',
     errors: {},
   };
 
-  handleEditorChange = e => {
-    console.log('Content was updated:', e.target.getContent());
+  async componentDidMount() {
+    const { noteid } = this.props.match.params;
 
-    this.setState({ body: e.target.getContent() });
-  };
+    const res = await axios.get(`http://localhost:8080/api/note/${noteid}`);
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+    const note = res.data;
+    this.setState({
+      title: note.title,
+      body: note.body,
+      phone: note.phone,
+    });
+  }
+
+  onChange = e => this.setState({ [e.target.title]: e.target.value });
 
   onSubmit = async (dispatch, e) => {
-    console.log('Add Note submit');
-
     e.preventDefault();
 
-    const { title, body, userid } = this.state;
+    const { title, body, phone } = this.state;
 
     //Check for errors
     if (title === '') {
-      this.setState({ errors: { title: 'Title is required' } });
+      this.setState({ errors: { title: 'title is required' } });
       return;
     }
 
     if (body === '') {
-      this.setState({ errors: { body: 'Body is required' } });
+      this.setState({ errors: { body: 'body is required' } });
       return;
     }
-    if (userid === '') {
-      this.setState({ errors: { userid: 'userid is required' } });
+    if (phone === '') {
+      this.setState({ errors: { phone: 'Phone is required' } });
       return;
     }
 
-    const newNote = {
+    const updateNote = {
       title,
-      userid,
       body,
+      phone,
     };
 
-    const res = await axios.post('http://localhost:8080/api/note/add', newNote);
+    const { noteid } = this.props.match.params;
+    const res = await axios.put(
+      `http://localhost:8080/api/note/update/${noteid}`,
+      updateNote
+    );
 
-    console.log('addding' + res);
-    dispatch({ type: 'ADD_NOTE', payload: res.data });
+    dispatch({ type: 'UPDATE_CONTACT', payload: res.data });
 
     //Clear State post add in list
     this.setState({
       title: '',
       body: '',
-      userid: '',
+      phone: '',
       errors: {},
     });
 
-    this.props.history.push('/notes');
+    this.props.history.push('/');
   };
 
   render() {
-    const { title, body, userid, errors } = this.state;
+    const { title, body, phone, errors } = this.state;
 
     return (
       <Consumer>
@@ -73,17 +80,18 @@ class AddNote extends Component {
           const { dispatch } = value;
           return (
             <div className="card mb-3">
-              <div className="card-header">Add Note</div>
+              <div className="card-header">Edit Note</div>
               <div className="card-body">
                 <form onSubmit={this.onSubmit.bind(this, dispatch)}>
                   <TextInputGroup
-                    label="Title"
+                    label="Name"
                     name="title"
                     placeholder="Enter title"
                     value={title}
                     onChange={this.onChange}
                     error={errors.title}
                   />
+
                   <TextInputGroup
                     label="body"
                     name="body"
@@ -93,21 +101,19 @@ class AddNote extends Component {
                     onChange={this.onChange}
                     error={errors.body}
                   />
-                  <label htmlFor={body}> body</label>
 
-                  <Editor
-                    apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
-                    initialValue={this.state.body}
-                    init={{
-                      plugins: 'link image code',
-                      toolbar:
-                        'undo redo | bold italic | alignleft aligncenter alignright | code',
-                    }}
-                    onChange={this.handleEditorChange}
+                  <TextInputGroup
+                    label="Phone"
+                    name="phone"
+                    placeholder="Enter Phone"
+                    value={phone}
+                    onChange={this.onChange}
+                    error={errors.phone}
                   />
+
                   <input
                     type="submit"
-                    value="Add Note"
+                    value="Update Note"
                     className="btn btn-light btn-block"
                   />
                 </form>
@@ -120,4 +126,4 @@ class AddNote extends Component {
   }
 }
 
-export default AddNote;
+export default EditNote;

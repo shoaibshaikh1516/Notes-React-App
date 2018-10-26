@@ -21,6 +21,11 @@ const Header = props => {
                 <i className="fas fa-home" /> Home
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/login" className="nav-link">
+                <i className="fas fa-sign-in-alt" /> Login
+              </Link>
+            </li>
 
             <li className="nav-item">
               <Link to="/notes" className="nav-link">

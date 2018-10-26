@@ -9,7 +9,7 @@ import AddContact from './components/contacts/AddContact';
 import AddNote from './components/notes/AddNote';
 import EditContact from './components/contacts/EditContact';
 import Test from './components/test/Test';
-
+import Login from './components/pages/Login';
 import { Provider } from './context';
 
 class App extends Component {
@@ -24,6 +24,7 @@ class App extends Component {
             <div className="container">
               <Switch>
                 <Route exact path="/" component={Contacts} />
+                <Route exact path="/login" component={Login} />
                 <Route exact path="/notes" component={Notes} />
                 <Route exact path="/contact/add" component={AddContact} />
                 <Route exact path="/contact/edit/:id" component={EditContact} />

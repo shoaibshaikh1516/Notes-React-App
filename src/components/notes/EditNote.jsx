@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
 import axios from 'axios';
+import { Editor } from '@tinymce/tinymce-react';
+// import JsxParser from 'react-jsx-parser';
 
 class EditNote extends Component {
   state = {
     title: '',
     body: '',
-    phone: '',
+    userid: '',
     errors: {},
   };
 
@@ -20,7 +22,8 @@ class EditNote extends Component {
     this.setState({
       title: note.title,
       body: note.body,
-      phone: note.phone,
+      userid: note.userid,
+      noteid: note.noteid,
     });
   }
 
@@ -28,8 +31,8 @@ class EditNote extends Component {
 
   onSubmit = async (dispatch, e) => {
     e.preventDefault();
-
-    const { title, body, phone } = this.state;
+    console.log(this.state);
+    const { title, body, userid } = this.state;
 
     //Check for errors
     if (title === '') {
@@ -41,38 +44,41 @@ class EditNote extends Component {
       this.setState({ errors: { body: 'body is required' } });
       return;
     }
-    if (phone === '') {
-      this.setState({ errors: { phone: 'Phone is required' } });
+    if (userid === '') {
+      this.setState({ errors: { userid: 'userid is required' } });
       return;
     }
 
     const updateNote = {
       title,
       body,
-      phone,
+      userid,
     };
 
     const { noteid } = this.props.match.params;
+
+    console.log(noteid);
+
     const res = await axios.put(
       `http://localhost:8080/api/note/update/${noteid}`,
       updateNote
     );
 
-    dispatch({ type: 'UPDATE_CONTACT', payload: res.data });
+    dispatch({ type: 'UPDATE_NOTE', payload: res.data });
 
     //Clear State post add in list
     this.setState({
       title: '',
       body: '',
-      phone: '',
+      userid: '',
       errors: {},
     });
 
-    this.props.history.push('/');
+    this.props.history.push('/notes');
   };
 
   render() {
-    const { title, body, phone, errors } = this.state;
+    const { title, body, userid, errors } = this.state;
 
     return (
       <Consumer>
@@ -91,7 +97,6 @@ class EditNote extends Component {
                     onChange={this.onChange}
                     error={errors.title}
                   />
-
                   <TextInputGroup
                     label="body"
                     name="body"
@@ -102,13 +107,26 @@ class EditNote extends Component {
                     error={errors.body}
                   />
 
+                  <Editor
+                    apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
+                    initialValue={this.state.body}
+                    init={{
+                      plugins: 'link image code',
+                      // branding: false,
+                      toolbar:
+                        'undo redo | bold italic | alignleft aligncenter alignright | code',
+                    }}
+                    onChange={this.handleEditorChange}
+                  />
+
                   <TextInputGroup
-                    label="Phone"
-                    name="phone"
-                    placeholder="Enter Phone"
-                    value={phone}
+                    label="userid"
+                    name="userid"
+                    type="userid"
+                    placeholder="Enter userid"
+                    value={userid}
                     onChange={this.onChange}
-                    error={errors.phone}
+                    error={errors.userid}
                   />
 
                   <input

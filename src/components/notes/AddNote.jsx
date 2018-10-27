@@ -3,7 +3,9 @@ import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
 import axios from 'axios';
 import { Editor } from '@tinymce/tinymce-react';
+// import Typography from '@material-ui/core/Typography';
 
+import JsxParser from 'react-jsx-parser';
 class AddNote extends Component {
   state = {
     title: '',
@@ -14,7 +16,6 @@ class AddNote extends Component {
 
   handleEditorChange = e => {
     console.log('Content was updated:', e.target.getContent());
-
     this.setState({ body: e.target.getContent() });
   };
 
@@ -44,8 +45,8 @@ class AddNote extends Component {
 
     const newNote = {
       title,
-      userid,
       body,
+      userid,
     };
 
     const res = await axios.post('http://localhost:8080/api/note/add', newNote);
@@ -57,7 +58,7 @@ class AddNote extends Component {
     this.setState({
       title: '',
       body: '',
-      userid: '',
+      userid: '', //ToDO:user info call to get userid
       errors: {},
     });
 
@@ -84,22 +85,26 @@ class AddNote extends Component {
                     onChange={this.onChange}
                     error={errors.title}
                   />
+
                   <TextInputGroup
-                    label="body"
-                    name="body"
-                    type="body"
-                    placeholder="Enter body"
-                    value={body}
+                    label="User id"
+                    name="userid"
+                    type="userid"
+                    placeholder="Enter userid"
+                    value={userid}
                     onChange={this.onChange}
-                    error={errors.body}
+                    error={errors.userid}
                   />
-                  <label htmlFor={body}> body</label>
+
+                  <label htmlFor={userid}> Body</label>
+                  <JsxParser jsx={body} />
 
                   <Editor
                     apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
                     initialValue={this.state.body}
                     init={{
                       plugins: 'link image code',
+                      // branding: false,
                       toolbar:
                         'undo redo | bold italic | alignleft aligncenter alignright | code',
                     }}

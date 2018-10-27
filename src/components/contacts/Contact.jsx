@@ -31,16 +31,28 @@ class Contact extends Component {
             <div className="card card-body mb-3">
               <h4>
                 {name}
-                {''}
-                <i
-                  onClick={() =>
-                    this.setState({
-                      showContactInfo: !this.state.showContactInfo,
-                    })
-                  }
-                  className="fas fa-sort-down"
-                  style={{ cursor: 'pointer' }}
-                />
+                {showContactInfo ? ( //sort arrow toggle start
+                  <i
+                    onClick={() =>
+                      this.setState({
+                        showContactInfo: !this.state.showContactInfo,
+                      })
+                    }
+                    className="fas fa-sort-up"
+                    style={{ cursor: 'pointer' }}
+                  />
+                ) : (
+                  <i
+                    onClick={() =>
+                      this.setState({
+                        showContactInfo: !this.state.showContactInfo,
+                      })
+                    }
+                    className="fas fa-sort-down"
+                    style={{ cursor: 'pointer' }}
+                  />
+                ) //sort arrow toggle End
+                }
 
                 <i
                   className="fas fa-times"
@@ -65,7 +77,7 @@ class Contact extends Component {
                 </Link>
               </h4>
 
-              {showContactInfo ? (
+              {showContactInfo ? ( //display toogle
                 <ul className="list-group">
                   <li className="list-group-item">Email: {email}</li>
                   <li className="list-group-item">Phone: {phone}</li>

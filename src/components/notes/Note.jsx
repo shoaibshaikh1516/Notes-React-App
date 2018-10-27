@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Consumer } from '../../context';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import JsxParser from 'react-jsx-parser';
 class Note extends Component {
   state = {
     showNoteInfo: false,
@@ -11,6 +11,7 @@ class Note extends Component {
 
   onDeleteClick = async (noteid, dispatch) => {
     try {
+      console.log(noteid);
       await axios.delete(`http://localhost:8080/api/note/delete/${noteid}`);
       //no need to use res obj as we are not getting any thing  back | ref get call
       dispatch({ type: 'DELETE_NOTE', payload: noteid });
@@ -29,18 +30,31 @@ class Note extends Component {
           const { dispatch } = value;
           return (
             <div className="card card-body mb-3">
-              <h4>
+              <h5>
                 {title}
-                {''}
-                <i
-                  onClick={() =>
-                    this.setState({
-                      showNoteInfo: !this.state.showNoteInfo,
-                    })
-                  }
-                  className="fas fa-sort-down"
-                  style={{ cursor: 'pointer' }}
-                />
+
+                {showNoteInfo ? ( //sort arrow toggle start
+                  <i
+                    onClick={() =>
+                      this.setState({
+                        showNoteInfo: !this.state.showNoteInfo,
+                      })
+                    }
+                    className="fas fa-sort-up"
+                    style={{ cursor: 'pointer' }}
+                  />
+                ) : (
+                  <i
+                    onClick={() =>
+                      this.setState({
+                        showNoteInfo: !this.state.showNoteInfo,
+                      })
+                    }
+                    className="fas fa-sort-down"
+                    style={{ cursor: 'pointer' }}
+                  />
+                ) //sort arrow toggle End
+                }
 
                 <i
                   className="fas fa-times"
@@ -63,11 +77,13 @@ class Note extends Component {
                     }}
                   />
                 </Link>
-              </h4>
+              </h5>
 
               {showNoteInfo ? (
                 <ul className="list-group">
-                  <li className="list-group-item">body: {body}</li>
+                  <li className="list-group-item">
+                    body: <JsxParser jsx={body} />
+                  </li>
                   <li className="list-group-item">userid: {userid}</li>
                 </ul>
               ) : null}
@@ -89,6 +105,7 @@ Note.propTypes = {
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired, //may be check this in future replace string with obj
   userid: PropTypes.string.isRequired,
+
   //not needed
 };
 

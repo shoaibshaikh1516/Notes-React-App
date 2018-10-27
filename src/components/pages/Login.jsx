@@ -4,9 +4,9 @@ import MainLogin from '../login/MainLogin';
 class Login extends Component {
   render() {
     return (
-      <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-6">
+      <div className="container">
+        <div className="row justify-content-md-center">
+          <div className="col col-lg-6">
             <MainLogin />{' '}
           </div>
         </div>

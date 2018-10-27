@@ -16,7 +16,7 @@ const reducer = (state, action) => {
     case 'DELETE_NOTE':
       return {
         ...state,
-        notes: state.notes.filter(Note => Note.id !== action.payload),
+        notes: state.notes.filter(Note => Note.noteid !== action.payload),
       };
     case 'ADD_CONTACT':
       return {
@@ -36,6 +36,16 @@ const reducer = (state, action) => {
             contact.id === action.payload.id
               ? (contact = action.payload)
               : contact
+        ),
+      };
+    case 'UPDATE_NOTE':
+      return {
+        ...state,
+        notes: state.notes.map(
+          note =>
+            note.noteid === action.payload.noteid
+              ? (note = action.payload)
+              : note
         ),
       };
 

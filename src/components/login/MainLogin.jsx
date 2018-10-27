@@ -12,7 +12,8 @@ import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   card: {
-    minWidth: 275,
+    minWidth: 240,
+    minHeight: 250,
     background: '#f9fafb',
   },
   textField: {
@@ -32,21 +33,21 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-  },
+
   dense: {
     marginTop: 16,
   },
   menu: {
     width: 200,
   },
+  // button: {
+  //   marginLeft: 70,
+  //   marginRight: theme.spacing.unit,
+  // },
 });
 
 function SimpleCard(props) {
   const { classes } = props;
-  const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <Card className={classes.card}>
@@ -75,11 +76,21 @@ function SimpleCard(props) {
         {/* <Button size="small">Login</Button>
         <Button size="small">Forgot</Button> */}
         <div class="row justify-content-md-center">
-          <div className="col flex justify-content-right">
-            <Button size="large" color="primary" variant="outlined">
+          <div class="col justify-content-md-center">
+            <Button
+              size="large"
+              color="primary"
+              variant="outlined"
+              className={classes.button}
+            >
               Login
             </Button>
-            <Button size="large" color="primary" variant="outlined">
+            <Button
+              size="large"
+              color="primary"
+              variant="outlined"
+              className={classes.button}
+            >
               Forgot
             </Button>
           </div>

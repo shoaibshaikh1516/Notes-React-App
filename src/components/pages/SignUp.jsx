@@ -1,0 +1,167 @@
+import React, { Component } from 'react';
+import { Consumer } from '../../context';
+import TextInputGroup from '../layout/TextInputGroup';
+import axios from 'axios';
+
+class SignUp extends Component {
+  state = {
+    name: '',
+    lastName: '',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
+    errors: {},
+  };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
+  onSubmit = async (dispatch, e) => {
+    e.preventDefault();
+
+    const {
+      name,
+      lastName,
+      email,
+      password,
+      passwordConfirmation,
+    } = this.state;
+
+    //Check for errors
+    if (name === '') {
+      this.setState({ errors: { name: 'name is required' } });
+      return;
+    }
+
+    console.log(name);
+
+    if (lastName === '') {
+      this.setState({ errors: { lastName: 'lastName is required' } });
+      return;
+    }
+
+    if (email === '') {
+      this.setState({ errors: { email: 'email is required' } });
+      return;
+    }
+    if (password === '') {
+      this.setState({ errors: { password: 'password is required' } });
+      return;
+    }
+    if (passwordConfirmation === '') {
+      this.setState({
+        errors: { passwordConfirmation: 'passwordConfirmation is required' },
+      });
+      return;
+    }
+
+    const newSignUp = {
+      name,
+      lastName,
+      email,
+      password,
+      passwordConfirmation,
+    };
+
+    const res = await axios.post(
+      'http://localhost:8080/api/user/add',
+      newSignUp
+    );
+
+    console.log('adddingssssss' + res);
+    dispatch({ type: 'ADD_USER', payload: res.data });
+
+    //Clear State post add in list
+    this.setState({
+      name: '',
+      lastName: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      errors: {},
+    });
+
+    this.props.history.push('/');
+  };
+
+  render() {
+    const {
+      name,
+      lastName,
+      email,
+      password,
+      passwordConfirmation,
+      errors,
+    } = this.state;
+
+    return (
+      <Consumer>
+        {value => {
+          const { dispatch } = value;
+          return (
+            <div className="card mb-3">
+              <div className="card-header">Add User/SignUp</div>
+              <div className="card-body">
+                <form onSubmit={this.onSubmit.bind(this, dispatch)}>
+                  <TextInputGroup
+                    label="name"
+                    name="name"
+                    type="text"
+                    placeholder="Enter name"
+                    value={name}
+                    onChange={this.onChange}
+                    error={errors.name}
+                  />
+
+                  <TextInputGroup
+                    label="last Name"
+                    name="lastName"
+                    type="text"
+                    placeholder="Enter lastName"
+                    value={lastName}
+                    onChange={this.onChange}
+                    error={errors.lastName}
+                  />
+                  <TextInputGroup
+                    label="email"
+                    name="email"
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={this.onChange}
+                    error={errors.email}
+                  />
+                  <TextInputGroup
+                    label="password"
+                    name="password"
+                    type="password"
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={this.onChange}
+                    error={errors.password}
+                  />
+                  <TextInputGroup
+                    label="last passwordConfirmation"
+                    name="passwordConfirmation"
+                    type="password"
+                    placeholder="Enter passwordConfirmation"
+                    value={passwordConfirmation}
+                    onChange={this.onChange}
+                    error={errors.passwordConfirmation}
+                  />
+
+                  <input
+                    type="submit"
+                    value="Add User/SignUp"
+                    className="btn btn-light btn-block"
+                  />
+                </form>
+              </div>
+            </div>
+          );
+        }}
+      </Consumer>
+    );
+  }
+}
+
+export default SignUp;

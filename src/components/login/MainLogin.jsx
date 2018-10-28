@@ -75,8 +75,8 @@ function SimpleCard(props) {
       <CardActions>
         {/* <Button size="small">Login</Button>
         <Button size="small">Forgot</Button> */}
-        <div class="row justify-content-md-center">
-          <div class="col justify-content-md-center">
+        <div className="row justify-content-md-center">
+          <div className="col justify-content-md-center">
             <Button
               size="large"
               color="primary"

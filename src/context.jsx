@@ -23,6 +23,11 @@ const reducer = (state, action) => {
         ...state,
         contacts: [action.payload, ...state.contacts],
       };
+    case 'ADD_USER':
+      return {
+        ...state,
+        usera: [action.payload, ...state.usera],
+      };
     case 'ADD_NOTE':
       return {
         ...state,
@@ -57,6 +62,7 @@ export class Provider extends Component {
   state = {
     contacts: [],
     notes: [],
+    usera: [],
     dispatch: action => this.setState(state => reducer(state, action)),
   };
 

@@ -11,6 +11,7 @@ import EditContact from './components/contacts/EditContact';
 import EditNote from './components/notes/EditNote';
 import Test from './components/test/Test';
 import Login from './components/pages/Login';
+import SignUpWithBN from './components/pages/SignUpWithBN';
 import { Provider } from './context';
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Contacts} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={SignUpWithBN} />
                 <Route exact path="/notes" component={Notes} />
                 <Route exact path="/contact/add" component={AddContact} />
                 <Route exact path="/contact/edit/:id" component={EditContact} />

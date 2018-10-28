@@ -10,6 +10,7 @@ class SignUp extends Component {
     email: '',
     password: '',
     passwordConfirmation: '',
+    role: '',
     errors: {},
   };
 
@@ -24,6 +25,7 @@ class SignUp extends Component {
       email,
       password,
       passwordConfirmation,
+      role,
     } = this.state;
 
     //Check for errors
@@ -53,6 +55,12 @@ class SignUp extends Component {
       });
       return;
     }
+    if (role === '') {
+      this.setState({
+        errors: { role: 'Role is required' },
+      });
+      return;
+    }
 
     const newSignUp = {
       name,
@@ -60,23 +68,26 @@ class SignUp extends Component {
       email,
       password,
       passwordConfirmation,
+      role,
     };
 
     const res = await axios.post(
       'http://localhost:8080/api/user/add',
       newSignUp
     );
-
+    console.log(JSON.stringify(res.data));
     console.log('adddingssssss' + res);
     dispatch({ type: 'ADD_USER', payload: res.data });
 
     //Clear State post add in list
+
     this.setState({
       name: '',
       lastName: '',
       email: '',
       password: '',
       passwordConfirmation: '',
+      role,
       errors: {},
     });
 
@@ -90,6 +101,7 @@ class SignUp extends Component {
       email,
       password,
       passwordConfirmation,
+      role,
       errors,
     } = this.state;
 
@@ -140,15 +152,22 @@ class SignUp extends Component {
                     error={errors.password}
                   />
                   <TextInputGroup
-                    label="last passwordConfirmation"
+                    label="Confirmation Password"
                     name="passwordConfirmation"
                     type="password"
-                    placeholder="Enter passwordConfirmation"
+                    placeholder="Confirmation Password"
                     value={passwordConfirmation}
                     onChange={this.onChange}
                     error={errors.passwordConfirmation}
                   />
-
+                  <TextInputGroup
+                    label="Role"
+                    name="role"
+                    placeholder="Enter Role"
+                    value={role}
+                    onChange={this.onChange}
+                    error={errors.role}
+                  />
                   <input
                     type="submit"
                     value="Add User/SignUp"

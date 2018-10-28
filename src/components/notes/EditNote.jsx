@@ -3,8 +3,7 @@ import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
 import axios from 'axios';
 import { Editor } from '@tinymce/tinymce-react';
-// import JsxParser from 'react-jsx-parser';
-
+import JsxParser from 'react-jsx-parser';
 class EditNote extends Component {
   state = {
     title: '',
@@ -90,22 +89,15 @@ class EditNote extends Component {
               <div className="card-body">
                 <form onSubmit={this.onSubmit.bind(this, dispatch)}>
                   <TextInputGroup
-                    label="Name"
+                    label="Title"
                     name="title"
                     placeholder="Enter title"
                     value={title}
                     onChange={this.onChange}
                     error={errors.title}
                   />
-                  <TextInputGroup
-                    label="body"
-                    name="body"
-                    type="body"
-                    placeholder="Enter body"
-                    value={body}
-                    onChange={this.onChange}
-                    error={errors.body}
-                  />
+                  <label htmlFor={userid}> Body</label>
+                  {/* <JsxParser jsx={body} /> */}
 
                   <Editor
                     apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
@@ -120,7 +112,7 @@ class EditNote extends Component {
                   />
 
                   <TextInputGroup
-                    label="userid"
+                    label="User Id"
                     name="userid"
                     type="userid"
                     placeholder="Enter userid"

@@ -103,16 +103,16 @@ class EditNote extends Component {
                     apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
                     initialValue={this.state.body}
                     init={{
-                      plugins: 'link image code',
+                      plugins: 'link image code textcolor textcolor',
                       // branding: false,
                       toolbar:
-                        'undo redo | bold italic | alignleft aligncenter alignright | code',
+                        'undo redo | bold italic | alignleft aligncenter alignright | code| forecolor | backcolor',
                     }}
                     onChange={this.handleEditorChange}
                   />
 
                   <TextInputGroup
-                    label="User Id"
+                    label="User"
                     name="userid"
                     type="userid"
                     placeholder="Enter userid"

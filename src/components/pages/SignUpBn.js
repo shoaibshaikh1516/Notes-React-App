@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import MainLogin from '../login/MainLogin';
 import SignUp from './SignUp';
 
-class Login extends Component {
+class SignUpBn extends Component {
   render() {
     return (
       <div className="container">
         <div className="row justify-content-md-center">
           <div className="col col-lg-6">
-            <MainLogin />
-            {/* <SignUp /> */}
+            <SignUp />
           </div>
         </div>
       </div>
@@ -17,7 +15,7 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default SignUpBn;
 
 {
   /* <div className="row">

@@ -13,7 +13,7 @@ import Test from './components/test/Test';
 import Login from './components/pages/Login';
 import SignUpBn from './components/pages/SignUpBn';
 import { Provider } from './context';
-
+import NewLogin from './components/login/NewLogin';
 class App extends Component {
   render() {
     return (
@@ -26,9 +26,11 @@ class App extends Component {
             <div className="container">
               <Switch>
                 <Route exact path="/" component={Contacts} />
-                <Route exact path="/login" component={Login} />
+                {/* <Route exact path="/login" component={Login} /> */}
+                <Route exact path="/login" component={NewLogin} />
                 <Route exact path="/signup" component={SignUpBn} />
                 <Route exact path="/notes" component={Notes} />
+                <Route exact path="/login" component={Notes} />
                 <Route exact path="/contact/add" component={AddContact} />
                 <Route exact path="/contact/edit/:id" component={EditContact} />
                 <Route exact path="/note/edit/:noteid" component={EditNote} />

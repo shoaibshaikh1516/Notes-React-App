@@ -4,6 +4,7 @@ import TextInputGroup from '../layout/TextInputGroup';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SetAuthToken from '../../SetAuthToken';
 class NewLogin extends Component {
   state = {
     username: '',
@@ -41,7 +42,9 @@ class NewLogin extends Component {
         newSignUp
       );
       console.log(JSON.stringify(res.data));
+      localStorage.setItem('jwttoken', res.data.token);
       console.log('adddingssssss' + res);
+      SetAuthToken(res.data.token);
       dispatch({ type: 'USER_LOGIN', payload: res.data });
     } catch (e) {
       console.log(e);

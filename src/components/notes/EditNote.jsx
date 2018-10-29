@@ -22,7 +22,7 @@ class EditNote extends Component {
       title: note.title,
       body: note.body,
       userid: note.userid,
-      noteid: note.noteid,
+      // noteid: note.noteid,
     });
   }
 
@@ -101,7 +101,7 @@ class EditNote extends Component {
 
                   <Editor
                     apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
-                    initialValue={this.state.body}
+                    initialValue={body}
                     init={{
                       plugins: 'link image code textcolor textcolor',
                       // branding: false,

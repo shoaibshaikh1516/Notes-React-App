@@ -2,25 +2,27 @@ import React, { Component } from 'react';
 import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 class NewLogin extends Component {
   state = {
-    email: '',
+    username: '',
     password: '',
     errors: {},
   };
 
+  notify = () => toast('Wow so easy !');
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = async (dispatch, e) => {
     e.preventDefault();
 
-    const { email, password } = this.state;
+    const { username, password } = this.state;
 
     //Check for errors
 
-    if (email === '') {
-      this.setState({ errors: { email: 'Email is required' } });
+    if (username === '') {
+      this.setState({ errors: { username: 'Email is required' } });
       return;
     }
     if (password === '') {
@@ -29,7 +31,7 @@ class NewLogin extends Component {
     }
 
     const newSignUp = {
-      email,
+      username,
       password,
     };
 
@@ -43,12 +45,19 @@ class NewLogin extends Component {
       dispatch({ type: 'USER_LOGIN', payload: res.data });
     } catch (e) {
       console.log(e);
+
+      return (
+        <div>
+          <button onClick={this.notify}>Notify !</button>
+          <ToastContainer />
+        </div>
+      );
     }
 
     //Clear State post add in list
 
     this.setState({
-      email: '',
+      username: '',
       password: '',
       errors: {},
     });
@@ -56,7 +65,7 @@ class NewLogin extends Component {
     this.props.history.push('/notes');
   };
   render() {
-    const { email, password, errors } = this.state;
+    const { username, password, errors } = this.state;
 
     return (
       <Consumer>
@@ -70,13 +79,13 @@ class NewLogin extends Component {
                   <div className="card-body">
                     <form onSubmit={this.onSubmit.bind(this, dispatch)}>
                       <TextInputGroup
-                        label="email"
-                        name="email"
-                        type="email"
+                        label="Email"
+                        name="username"
+                        type="username"
                         placeholder="Enter Email"
-                        value={email}
+                        value={username}
                         onChange={this.onChange}
-                        error={errors.email}
+                        error={errors.username}
                       />
                       <TextInputGroup
                         label="password"

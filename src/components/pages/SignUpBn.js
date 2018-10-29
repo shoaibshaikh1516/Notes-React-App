@@ -14,8 +14,3 @@ class SignUpBn extends Component {
 }
 
 export default SignUpBn;
-
-{
-  /* <div className="row">
-<div className="col-md col-md-off-4"> */
-}

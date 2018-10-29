@@ -18,8 +18,3 @@ class Login extends Component {
 }
 
 export default Login;
-
-{
-  /* <div className="row">
-<div className="col-md col-md-off-4"> */
-}

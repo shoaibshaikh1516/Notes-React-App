@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from './Login';
-import JsxParser from 'react-jsx-parser';
+// import Login from './Login';
+// import JsxParser from 'react-jsx-parser';
 export default props => {
   return (
     <div>

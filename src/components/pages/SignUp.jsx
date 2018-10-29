@@ -115,7 +115,7 @@ class SignUp extends Component {
               <div className="card-body">
                 <form onSubmit={this.onSubmit.bind(this, dispatch)}>
                   <TextInputGroup
-                    label="name"
+                    label="Name"
                     name="name"
                     type="text"
                     placeholder="Enter name"
@@ -125,7 +125,7 @@ class SignUp extends Component {
                   />
 
                   <TextInputGroup
-                    label="last Name"
+                    label="Last Name"
                     name="lastName"
                     type="text"
                     placeholder="Enter lastName"
@@ -134,7 +134,7 @@ class SignUp extends Component {
                     error={errors.lastName}
                   />
                   <TextInputGroup
-                    label="email"
+                    label="Email"
                     name="email"
                     type="email"
                     placeholder="Enter email"
@@ -143,7 +143,7 @@ class SignUp extends Component {
                     error={errors.email}
                   />
                   <TextInputGroup
-                    label="password"
+                    label="Password"
                     name="password"
                     type="password"
                     placeholder="Enter password"

@@ -9,7 +9,7 @@ class Login extends Component {
   render() {
     return (
       <div className="row ">
-        <div className="col offset-6 ">
+        <div className="col-md-6 offset-3 ">
           <MainLogin />
         </div>
       </div>

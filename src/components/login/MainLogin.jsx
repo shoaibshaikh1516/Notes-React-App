@@ -17,7 +17,7 @@ const styles = theme => ({
     background: '#f9fafb',
   },
   textField: {
-    marginLeft: 10,
+    marginLeft: 24,
     marginRight: 10,
   },
   bullet: {

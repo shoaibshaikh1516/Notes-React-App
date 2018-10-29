@@ -17,16 +17,16 @@ const styles = theme => ({
     background: '#f9fafb',
   },
   textField: {
-    marginLeft: 'theme.spacing.unit',
-    marginRight: 'theme.spacing.unit',
+    marginLeft: 10,
+    marginRight: 10,
   },
   bullet: {
-    display: 'inline-block',
+    // display: 'inline-block',
     margin: '0 2px',
-    transform: 'scale(0.8)',
+    // transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 14,
+    fontSize: 10,
   },
 
   container: {
@@ -75,26 +75,23 @@ function SimpleCard(props) {
       <CardActions>
         {/* <Button size="small">Login</Button>
         <Button size="small">Forgot</Button> */}
-        <div className="row justify-content-md-center">
-          <div className="col justify-content-md-center">
-            <Button
-              size="large"
-              color="primary"
-              variant="outlined"
-              className={classes.button}
-            >
-              Login
-            </Button>
-            <Button
-              size="large"
-              color="primary"
-              variant="outlined"
-              className={classes.button}
-            >
-              Forgot
-            </Button>
-          </div>
-        </div>
+
+        <Button
+          size="large"
+          color="primary"
+          variant="outlined"
+          className={classes.button}
+        >
+          Login
+        </Button>
+        <Button
+          size="large"
+          color="primary"
+          variant="outlined"
+          className={classes.button}
+        >
+          Forgot
+        </Button>
       </CardActions>
     </Card>
   );

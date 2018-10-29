@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import MainLogin from '../login/MainLogin';
-import SignUp from './SignUp';
-
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 class Login extends Component {
   render() {
     return (
-      <div className="container">
-        <div className="row justify-content-md-center">
-          <div className="col col-lg-6">
-            <MainLogin />
-            {/* <SignUp /> */}
-          </div>
+      <div className="row ">
+        <div className="col offset-6 ">
+          <MainLogin />
         </div>
       </div>
     );

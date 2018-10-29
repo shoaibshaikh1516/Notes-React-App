@@ -34,7 +34,7 @@ const Header = props => {
 
             <li className="nav-item">
               <Link to="/notes" className="nav-link">
-                <i className="fas fa-home" /> Notes
+                <i class="far fa-sticky-note" /> Notes
               </Link>
             </li>
 

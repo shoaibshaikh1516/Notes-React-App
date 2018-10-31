@@ -1,115 +1,39 @@
 import React, { Component } from 'react';
-import { Consumer } from '../../context';
-import TextInputGroup from '../layout/TextInputGroup';
-import axios from 'axios';
+import Contact from './Contact';
 
-class AddContact extends Component {
-  state = {
-    name: '',
-    email: '',
-    phone: '',
-    errors: {},
-  };
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+import { getContacts } from '../../actions/contactActions';
 
-  onSubmit = async (dispatch, e) => {
-    e.preventDefault();
-
-    const { name, email, phone } = this.state;
-
-    //Check for errors
-    if (name === '') {
-      this.setState({ errors: { name: 'Name is required' } });
-      return;
-    }
-
-    if (email === '') {
-      this.setState({ errors: { email: 'Email is required' } });
-      return;
-    }
-    if (phone === '') {
-      this.setState({ errors: { phone: 'Phone is required' } });
-      return;
-    }
-
-    const newContact = {
-      name,
-      phone,
-      email,
-    };
-
-    const res = await axios.post(
-      'https://jsonplaceholder.typicode.com/users',
-      newContact
-    );
-
-    dispatch({ type: 'ADD_CONTACT', payload: res.data });
-
-    //Clear State post add in list
-    this.setState({
-      name: '',
-      email: '',
-      phone: '',
-      errors: {},
-    });
-
-    this.props.history.push('/');
+class Contacts extends Component {
+  componentDidMount = () => {
+    this.props.getContacts();
   };
 
   render() {
-    const { name, email, phone, errors } = this.state;
-
+    const { contacts } = this.props;
     return (
-      <Consumer>
-        {value => {
-          const { dispatch } = value;
-          return (
-            <div className="card mb-3">
-              <div className="card-header">Add Contact</div>
-              <div className="card-body">
-                <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                  <TextInputGroup
-                    label="Name"
-                    name="name"
-                    placeholder="Enter Name"
-                    value={name}
-                    onChange={this.onChange}
-                    error={errors.name}
-                  />
-
-                  <TextInputGroup
-                    label="Email"
-                    name="email"
-                    type="email"
-                    placeholder="Enter Email"
-                    value={email}
-                    onChange={this.onChange}
-                    error={errors.email}
-                  />
-
-                  <TextInputGroup
-                    label="Phone"
-                    name="phone"
-                    placeholder="Enter Phone"
-                    value={phone}
-                    onChange={this.onChange}
-                    error={errors.phone}
-                  />
-
-                  <input
-                    type="submit"
-                    value="Add Contact"
-                    className="btn btn-light btn-block"
-                  />
-                </form>
-              </div>
-            </div>
-          );
-        }}
-      </Consumer>
+      <React.Fragment>
+        <h1 className="display-4 mb-2">
+          <span className="text-danger">Contact</span> List
+        </h1>
+        {contacts.map(contact => (
+          <Contact key={contact.id} contact={contact} />
+        ))}
+      </React.Fragment>
     );
   }
 }
 
-export default AddContact;
+Contacts.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  getContacts: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({ contacts: state.contact.contacts });
+
+export default connect(
+  mapStateToProps,
+  { getContacts }
+)(Contacts);

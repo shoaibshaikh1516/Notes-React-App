@@ -25,6 +25,7 @@ class App extends Component {
             <Header branding="JOTter / SEMIBREVE" />
             <div className="container">
               <Switch>
+                <Route exact path="/" component={Notes} />
                 <Route exact path="/contact" component={Contacts} />
                 {/* <Route exact path="/login" component={Login} /> */}
                 <Route exact path="/login" component={NewLogin} />

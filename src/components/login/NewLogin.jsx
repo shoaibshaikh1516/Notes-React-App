@@ -41,9 +41,7 @@ class NewLogin extends Component {
         'http://localhost:8080/auth/login',
         newSignUp
       );
-      console.log(JSON.stringify(res.data));
       localStorage.setItem('jwttoken', res.data.token);
-      console.log('adddingssssss' + res);
       SetAuthToken(res.data.token);
       dispatch({ type: 'USER_LOGIN', payload: res.data });
     } catch (e) {
@@ -78,7 +76,15 @@ class NewLogin extends Component {
             <div className="row">
               <div className="col-md-4 offset-4 ">
                 <div className="card mb-3">
-                  <div className="card-header">Add User/SignUp</div>
+                  <div className="card-header text-center">
+                    <div className="row">
+                      <div className="col ">
+                        <i className="fas fa-lock" />
+                      </div>
+                      <div className="col mr-auto"> Login</div>
+                    </div>
+                  </div>
+
                   <div className="card-body">
                     <form onSubmit={this.onSubmit.bind(this, dispatch)}>
                       <TextInputGroup

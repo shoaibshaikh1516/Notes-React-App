@@ -31,7 +31,6 @@ const TextInputGroup = ({
 };
 
 TextInputGroup.propTypes = {
-  //forgot to commit with lower case 'p'
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,

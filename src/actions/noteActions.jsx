@@ -26,7 +26,7 @@ export const deleteNote = noteid => async dispatch => {
     await axios.delete(`http://localhost:8080/api/note/delete/${noteid}`);
     dispatch({ type: DELETE_NOTE, payload: noteid }); //for  jsonplaceholder only
   } catch (e) {
-    dispatch({ type: DELETE_NOTE, payload: noteid }); //for  jsonplaceholder only
+    // dispatch({ type: DELETE_NOTE, payload: noteid }); //for  jsonplaceholder only
   }
 };
 

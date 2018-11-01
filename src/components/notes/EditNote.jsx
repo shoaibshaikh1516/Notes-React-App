@@ -24,7 +24,7 @@ class EditNote extends Component {
     this.props.getNote(noteid);
   }
 
-  onSubmit = async e => {
+  onSubmit = e => {
     e.preventDefault();
     const { title, body, userid } = this.state;
 

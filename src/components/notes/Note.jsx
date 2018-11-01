@@ -11,11 +11,16 @@ class Note extends Component {
   };
 
   onDeleteClick = noteid => {
+    console.log(noteid);
+
     this.props.deleteNote(noteid);
   };
 
   render() {
     const { noteid, title, body, userid } = this.props.note;
+
+    console.log(this.props.note);
+
     const { showNoteInfo } = this.state;
     return (
       <div className="card card-body mb-3">

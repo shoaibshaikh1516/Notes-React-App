@@ -13,7 +13,10 @@ export const getNotes = () => async dispatch => {
   dispatch({ type: GET_NOTES, payload: res.data });
 };
 export const getNote = noteid => async dispatch => {
+  console.log(noteid);
   const res = await axios.get(`http://localhost:8080/api/note/${noteid}`);
+
+  console.log(noteid);
 
   dispatch({ type: GET_NOTE, payload: res.data });
 };

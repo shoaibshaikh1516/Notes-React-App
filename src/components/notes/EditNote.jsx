@@ -15,23 +15,16 @@ class EditNote extends Component {
 
   UNSAFE_componentWillReceiveProps(nextProps, nextState) {
     //deprecated
-    const { name, email, phone } = nextProps.note;
-    this.setState({ name, email, phone });
+    const { title, body, userid } = nextProps.note;
+    this.setState({ title, body, userid });
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
-    this.props.getNote(id);
+    const { noteid } = this.props.match.params;
+    this.props.getNote(noteid);
   }
 
-  handleEditorChange = e => {
-    console.log('Content was updated:', e.target.getContent());
-    this.setState({ body: e.target.getContent() });
-  };
-
-  onChange = e => this.setState({ [e.target.title]: e.target.value });
-
-  onSubmit = async (dispatch, e) => {
+  onSubmit = async e => {
     e.preventDefault();
     const { title, body, userid } = this.state;
 
@@ -49,8 +42,9 @@ class EditNote extends Component {
       this.setState({ errors: { userid: 'userid is required' } });
       return;
     }
-
+    const { noteid } = this.props.match.params;
     const updateNote = {
+      noteid,
       title,
       body,
       userid,
@@ -67,6 +61,13 @@ class EditNote extends Component {
     });
 
     this.props.history.push('/notes');
+  };
+
+  onChange = e => this.setState({ [e.target.title]: e.target.value });
+
+  handleEditorChange = e => {
+    console.log('Content was updated:', e.target.getContent());
+    this.setState({ body: e.target.getContent() });
   };
 
   render() {

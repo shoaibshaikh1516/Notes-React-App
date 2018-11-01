@@ -16,6 +16,11 @@ class AddNote extends Component {
     errors: {},
   };
 
+  handleEditorChange = e => {
+    console.log('Content was updated:', e.target.getContent());
+    this.setState({ body: e.target.getContent() });
+  };
+
   onSubmit = e => {
     e.preventDefault();
 

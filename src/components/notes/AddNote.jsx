@@ -1,29 +1,22 @@
 import React, { Component } from 'react';
-import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
-import axios from 'axios';
+// import axios from 'axios';
+import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
-// import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
+import { addNote } from '../../actions/noteActions';
 
 import JsxParser from 'react-jsx-parser';
+
 class AddNote extends Component {
   state = {
-    title: '',
-    body: '',
-    userid: '',
+    name: '',
+    email: '',
+    phone: '',
     errors: {},
   };
 
-  handleEditorChange = e => {
-    console.log('Content was updated:', e.target.getContent());
-    this.setState({ body: e.target.getContent() });
-  };
-
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
-
-  onSubmit = async (dispatch, e) => {
-    console.log('Add Note submit');
-
+  onSubmit = e => {
     e.preventDefault();
 
     const { title, body, userid } = this.state;
@@ -49,10 +42,7 @@ class AddNote extends Component {
       userid,
     };
 
-    const res = await axios.post('http://localhost:8080/api/note/add', newNote);
-
-    console.log('addding' + res);
-    dispatch({ type: 'ADD_NOTE', payload: res.data });
+    this.props.addNote(newNote); //redux thunk is used
 
     //Clear State post add in list
     this.setState({
@@ -64,65 +54,79 @@ class AddNote extends Component {
 
     this.props.history.push('/notes');
   };
+  // componentDidMount = () => {
+  //   this.props.getNotes();
+  // };
+
+  // handleEditorChange = e => {
+  //   console.log('Content was updated:', e.target.getContent());
+  //   this.setState({ body: e.target.getContent() });
+  // };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     const { title, body, userid, errors } = this.state;
 
     return (
-      <Consumer>
-        {value => {
-          const { dispatch } = value;
-          return (
-            <div className="card mb-3">
-              <div className="card-header">Add Note</div>
-              <div className="card-body">
-                <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                  <TextInputGroup
-                    label="Title"
-                    name="title"
-                    placeholder="Enter title"
-                    value={title}
-                    onChange={this.onChange}
-                    error={errors.title}
-                  />
+      <div className="card mb-3">
+        <div className="card-header">Add Note</div>
+        <div className="card-body">
+          <form onSubmit={this.onSubmit.bind(this)}>
+            <TextInputGroup
+              label="Title"
+              name="title"
+              placeholder="Enter title"
+              value={title}
+              onChange={this.onChange}
+              error={errors.title}
+            />
 
-                  <TextInputGroup
-                    label="User id"
-                    name="userid"
-                    type="userid"
-                    placeholder="Enter userid"
-                    value={userid}
-                    onChange={this.onChange}
-                    error={errors.userid}
-                  />
+            <TextInputGroup
+              label="User id"
+              name="userid"
+              type="userid"
+              placeholder="Enter userid"
+              value={userid}
+              onChange={this.onChange}
+              error={errors.userid}
+            />
 
-                  <label htmlFor={userid}> Body</label>
-                  <JsxParser jsx={body} />
+            <label htmlFor={userid}> Body</label>
+            <JsxParser jsx={body} />
 
-                  <Editor
-                    apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
-                    initialValue={this.state.body}
-                    init={{
-                      plugins: 'link image code',
-                      // branding: false,
-                      toolbar:
-                        'undo redo | bold italic | alignleft aligncenter alignright | code',
-                    }}
-                    onChange={this.handleEditorChange}
-                  />
-                  <input
-                    type="submit"
-                    value="Add Note"
-                    className="btn btn-light btn-block"
-                  />
-                </form>
-              </div>
-            </div>
-          );
-        }}
-      </Consumer>
+            <Editor
+              apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
+              initialValue={this.state.body}
+              init={{
+                plugins: 'link image code',
+                // branding: false,
+                toolbar:
+                  'undo redo | bold italic | alignleft aligncenter alignright | code',
+              }}
+              onChange={this.handleEditorChange}
+            />
+            <input
+              type="submit"
+              value="Add Note"
+              className="btn btn-light btn-block"
+            />
+          </form>
+        </div>
+      </div>
     );
   }
 }
 
-export default AddNote;
+AddNote.propTypes = {
+  // notes: PropTypes.array.isRequired,
+  // getNotes: PropTypes.func.isRequired,
+  addNote: PropTypes.func.isRequired,
+};
+
+// const mapStateToProps = state => ({ notes: state.note.notes });
+
+export default connect(
+  null,
+  { addNote }
+)(AddNote);

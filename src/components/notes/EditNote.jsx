@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
-import axios from 'axios';
 import { Editor } from '@tinymce/tinymce-react';
 import JsxParser from 'react-jsx-parser';
+import { connect } from 'react-redux';
+import { getNote, updateNote } from '../../actions/noteActions';
+import PropTypes from 'prop-types';
 class EditNote extends Component {
   state = {
     title: '',
@@ -12,25 +13,26 @@ class EditNote extends Component {
     errors: {},
   };
 
-  async componentDidMount() {
-    const { noteid } = this.props.match.params;
-
-    const res = await axios.get(`http://localhost:8080/api/note/${noteid}`);
-
-    const note = res.data;
-    this.setState({
-      title: note.title,
-      body: note.body,
-      userid: note.userid,
-      // noteid: note.noteid,
-    });
+  UNSAFE_componentWillReceiveProps(nextProps, nextState) {
+    //deprecated
+    const { name, email, phone } = nextProps.note;
+    this.setState({ name, email, phone });
   }
+
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.props.getNote(id);
+  }
+
+  handleEditorChange = e => {
+    console.log('Content was updated:', e.target.getContent());
+    this.setState({ body: e.target.getContent() });
+  };
 
   onChange = e => this.setState({ [e.target.title]: e.target.value });
 
   onSubmit = async (dispatch, e) => {
     e.preventDefault();
-    console.log(this.state);
     const { title, body, userid } = this.state;
 
     //Check for errors
@@ -54,16 +56,7 @@ class EditNote extends Component {
       userid,
     };
 
-    const { noteid } = this.props.match.params;
-
-    console.log(noteid);
-
-    const res = await axios.put(
-      `http://localhost:8080/api/note/update/${noteid}`,
-      updateNote
-    );
-
-    dispatch({ type: 'UPDATE_NOTE', payload: res.data });
+    this.props.updateNote(updateNote);
 
     //Clear State post add in list
     this.setState({
@@ -80,60 +73,63 @@ class EditNote extends Component {
     const { title, body, userid, errors } = this.state;
 
     return (
-      <Consumer>
-        {value => {
-          const { dispatch } = value;
-          return (
-            <div className="card mb-3">
-              <div className="card-header">Edit Note</div>
-              <div className="card-body">
-                <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                  <TextInputGroup
-                    label="Title"
-                    name="title"
-                    placeholder="Enter title"
-                    value={title}
-                    onChange={this.onChange}
-                    error={errors.title}
-                  />
-                  <label htmlFor={userid}> Body</label>
-                  {/* <JsxParser jsx={body} /> */}
+      <div className="card mb-3">
+        <div className="card-header">Edit Note</div>
+        <div className="card-body">
+          <form onSubmit={this.onSubmit}>
+            <TextInputGroup
+              label="Title"
+              name="title"
+              placeholder="Enter title"
+              value={title}
+              onChange={this.onChange}
+              error={errors.title}
+            />
+            <label htmlFor={userid}> Body</label>
+            {/* <JsxParser jsx={body} /> */}
 
-                  <Editor
-                    apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
-                    initialValue={body}
-                    init={{
-                      plugins: 'link image code textcolor textcolor',
-                      // branding: false,
-                      toolbar:
-                        'undo redo | bold italic | alignleft aligncenter alignright | code| forecolor | backcolor',
-                    }}
-                    onChange={this.handleEditorChange}
-                  />
+            <Editor
+              apiKey="2edmaulpnq9gkukbofns3y3ifatfo0yemunty0b62sns25n6"
+              initialValue={body}
+              init={{
+                plugins: 'link image code textcolor textcolor',
+                // branding: false,
+                toolbar:
+                  'undo redo | bold italic | alignleft aligncenter alignright | code| forecolor | backcolor',
+              }}
+              onChange={this.handleEditorChange}
+            />
 
-                  <TextInputGroup
-                    label="User"
-                    name="userid"
-                    type="userid"
-                    placeholder="Enter userid"
-                    value={userid}
-                    onChange={this.onChange}
-                    error={errors.userid}
-                  />
+            <TextInputGroup
+              label="User"
+              name="userid"
+              type="userid"
+              placeholder="Enter userid"
+              value={userid}
+              onChange={this.onChange}
+              error={errors.userid}
+            />
 
-                  <input
-                    type="submit"
-                    value="Update Note"
-                    className="btn btn-light btn-block"
-                  />
-                </form>
-              </div>
-            </div>
-          );
-        }}
-      </Consumer>
+            <input
+              type="submit"
+              value="Update Note"
+              className="btn btn-light btn-block"
+            />
+          </form>
+        </div>
+      </div>
     );
   }
 }
 
-export default EditNote;
+EditNote.propTypes = {
+  note: PropTypes.object.isRequired,
+  getNote: PropTypes.func.isRequired,
+};
+const mapStateToProps = state => ({
+  note: state.note.note, //coming from REDUX
+});
+export default connect(
+  mapStateToProps,
+  { getNote, updateNote }
+)(EditNote);

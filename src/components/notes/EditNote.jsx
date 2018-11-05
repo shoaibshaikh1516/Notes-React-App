@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import TextInputGroup from '../layout/TextInputGroup';
+import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
 import JsxParser from 'react-jsx-parser';
 import { connect } from 'react-redux';
 import { getNote, updateNote } from '../../actions/noteActions';
-import PropTypes from 'prop-types';
 class EditNote extends Component {
   state = {
     title: '',
@@ -63,7 +63,7 @@ class EditNote extends Component {
     this.props.history.push('/notes');
   };
 
-  onChange = e => this.setState({ [e.target.title]: e.target.value });
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   handleEditorChange = e => {
     console.log('Content was updated:', e.target.getContent());

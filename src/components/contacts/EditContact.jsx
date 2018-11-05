@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TextInputGroup from '../layout/TextInputGroup';
-
 import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
 import { getContact, updateContact } from '../../actions/contactActions';
 class EditContact extends Component {

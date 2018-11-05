@@ -22,7 +22,6 @@ class Notes extends Component {
           <Note
             key={note.noteid}
             note={note} // passing entire object
-            //As this going to be handled in context
           />
         ))}
       </React.Fragment>

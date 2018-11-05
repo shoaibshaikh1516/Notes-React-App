@@ -82,20 +82,6 @@ class Note extends Component {
   }
 }
 
-// Note.defaultProps = {
-//   title: 'User',
-//   body: 'Nil',
-//   userid: 'Nil',
-// };
-
-// Note.propTypes = {
-//   title: PropTypes.string.isRequired,
-//   body: PropTypes.string.isRequired, //may be check this in future replace string with obj
-//   userid: PropTypes.string.isRequired,
-
-//   //not needed
-// };
-
 Note.propTypes = {
   note: PropTypes.object.isRequired,
   deleteNote: PropTypes.func.isRequired,

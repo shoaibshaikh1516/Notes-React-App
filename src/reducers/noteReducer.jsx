@@ -40,7 +40,7 @@ export default function(state = initialState, action) {
         ...state,
         notes: state.notes.map(
           note =>
-            note.id === action.payload.id ? (note = action.payload) : note
+            note.id === action.payload.id ? (note = action.payload) : note //equals
         ),
       };
     default:

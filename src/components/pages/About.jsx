@@ -18,6 +18,8 @@ export default props => {
         science. Each member of our team is highly energetic and committed to
         helping our clients achieve their goals.
       </p>
+
+      <script src="https://gist.github.com/shoaibshaikh1516/4493c5d33e17245ddfd3b706dbf2e586.js" />
       {/* <JsxParser
         jsx="Passionate About Technology Clairvoyant is a global technology
         consulting and services company. We help organizations build innovative

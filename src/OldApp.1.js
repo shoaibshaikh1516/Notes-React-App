@@ -7,7 +7,6 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
-import Register from './components/auth/Register';
 import About from './components/pages/About';
 import AddContact from './components/contacts/AddContact';
 import AddNote from './components/notes/AddNote';
@@ -35,8 +34,7 @@ class App extends Component {
                 {/* <Route exact path="/login" component={Login} /> */}
                 {/* <Route exact path="/login" component={NewLogin} /> */}
                 <Route exact path="/login" component={Login} />
-                {/* <Route exact path="/signup" component={SignUpBn} /> */}
-                <Route exact path="/register" component={Register} />
+                <Route exact path="/signup" component={SignUpBn} />
                 <Route exact path="/notes" component={Notes} />
                 <Route exact path="/login" component={Notes} />
                 <Route exact path="/contact/add" component={AddContact} />

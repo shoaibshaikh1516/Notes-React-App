@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import SetAuthToken from '../../SetAuthToken';
 class NewLogin extends Component {
   state = {
@@ -12,7 +10,6 @@ class NewLogin extends Component {
     errors: {},
   };
 
-  notify = () => toast('Wow so easy !');
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onSubmit = async (dispatch, e) => {
@@ -46,13 +43,6 @@ class NewLogin extends Component {
       dispatch({ type: 'USER_LOGIN', payload: res.data });
     } catch (e) {
       console.log(e);
-
-      return (
-        <div>
-          <button onClick={this.notify}>Notify !</button>
-          <ToastContainer />
-        </div>
-      );
     }
 
     //Clear State post add in list

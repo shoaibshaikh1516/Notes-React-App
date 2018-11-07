@@ -33,24 +33,23 @@ class Register extends Component {
       password: this.state.password,
       passwordConfirmation: this.state.passwordConfirmation,
     };
-    let cars = new Array();
+
+    var extractedObject = {};
     axios
       .post('http://localhost:8080/api/user/add', newUser)
       .then(res => console.log(res.data))
       .catch(err => {
         let s = err.response.data.errors;
         s.map(item => {
-          cars.push("{'" + item.field + "':'" + item.defaultMessage + "'}");
+          extractedObject[item.field] = item.defaultMessage;
         });
 
-        this.setState({ errors: cars });
-        console.log(JSON.stringify(cars));
+        this.setState({ errors: extractedObject });
       });
   }
 
   render() {
     const { errors } = this.state;
-    console.log('dfdfd', errors);
 
     return (
       <div className="register">

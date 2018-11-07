@@ -56,8 +56,11 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
 
+    const { user } = this.props.auth; //this is coming from redux
+
     return (
       <div className="register">
+        {user ? user.name : null}
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -160,7 +163,9 @@ class Register extends Component {
   }
 }
 
+const mapstateToProps = state => ({ auth: state.auth }); // so what this does is it states value in auth so we can acces it by using// this.props.auth.user  or this.props.auth.isAuthenticated
+
 export default connect(
-  null,
+  mapstateToProps,
   { registerUser }
 )(Register);

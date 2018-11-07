@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { registerUser } from '../../actions/authActions';
 
@@ -162,6 +163,11 @@ class Register extends Component {
     );
   }
 }
+
+Register.PropTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
 
 const mapstateToProps = state => ({ auth: state.auth }); // so what this does is it states value in auth so we can acces it by using// this.props.auth.user  or this.props.auth.isAuthenticated
 

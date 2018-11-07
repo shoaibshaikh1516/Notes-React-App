@@ -16,7 +16,7 @@ class Landing extends Component {
                 </p>
                 <hr />
 
-                <Link to="/register" className="btn btn-lg btn-info mr-3">
+                <Link to="/signup" className="btn btn-lg btn-info mr-3">
                   <i className="fas fa-user-plus" /> Sign Up
                 </Link>
 

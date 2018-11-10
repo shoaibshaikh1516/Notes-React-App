@@ -10,3 +10,4 @@ export const ADD_NOTE = 'ADD_NOTE';
 export const GET_NOTE = 'GET_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
 export const GET_ERRORS = 'GET_ERRORS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';

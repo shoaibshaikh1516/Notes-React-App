@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -37,19 +37,6 @@ class Register extends Component {
       password: this.state.password,
       passwordConfirmation: this.state.passwordConfirmation,
     };
-
-    var extractedObject = {};
-    // axios
-    //   .post('http://localhost:8080/api/user/add', newUser)
-    //   .then(res => console.log(res.data))
-    //   .catch(err => {
-    //     let s = err.response.data.errors;
-    //     s.map(item => {
-    //       extractedObject[item.field] = item.defaultMessage;
-    //     });
-
-    //     this.setState({ errors: extractedObject });
-    //   });
 
     this.props.registerUser(newUser);
   }
@@ -164,7 +151,7 @@ class Register extends Component {
   }
 }
 
-Register.PropTypes = {
+Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
 };

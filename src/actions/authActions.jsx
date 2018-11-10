@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 export const registerUser = (userData, history) => dispatch => {
   axios
     .post('http://localhost:8080/api/user/add', userData)
-    .then(res => history.push('/login'))
+    .then(res => history.push('/login')) //redux login action
     .catch(err => {
       var extractedObject = {};
 
@@ -27,30 +27,23 @@ export const loginUser = userData => dispatch => {
   axios
     .post('http://localhost:8080/auth/login', userData)
     .then(res => {
-      //save to localstoreage
+      // Save to localStorage
       const { token } = res.data;
-      //seet token to ls
+      // Set token to ls
       localStorage.setItem('jwtToken', token);
-      //Set token to auth header
+      // Set token to Auth header
       setAuthToken(token);
-
+      // Decode token to get user data
       const decoded = jwt_decode(token);
-      //Set current user
-
+      // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    .catch(err => {
-      var extractedObject = {};
-
-      let s = err.response.data.errors;
-      s.map(item => {
-        extractedObject[item.field] = item.defaultMessage;
-      });
+    .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: extractedObject,
-      });
-    });
+        payload: err.response.data,
+      })
+    );
 };
 
 //Set Logged in user

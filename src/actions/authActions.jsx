@@ -1,24 +1,23 @@
-import { TEST_DISPATCH } from './types';
+import { GET_ERRORS } from './types';
 import axios from 'axios';
 
-export const registerUser = userData => {
-  var extractedObject = {};
+export const registerUser = userData => dispatch => {
+  axios
+    .post('http://localhost:8080/api/user/add', userData)
+    .then(res => console.log(res.data))
+    .catch(err => {
+      var extractedObject = {};
 
-  return {
-    type: TEST_DISPATCH,
-    payload: userData,
-  };
-  // axios
-  //   .post('http://localhost:8080/api/user/add', newUser)
-  //   .then(res => console.log(res.data))
-  //   .catch(err => {
-  // let s = err.response.data.errors;
-  // s.map(item => {
-  //   extractedObject[item.field] = item.defaultMessage;
-  // });
+      let s = err.response.data.errors;
+      s.map(item => {
+        extractedObject[item.field] = item.defaultMessage;
+      });
 
-  // this.setState({ errors: extractedObject });
-  //   });
+      // this.setState({ errors: extractedObject });
 
-  // this.props.registerUser(newUser);
+      dispatch({
+        type: GET_ERRORS,
+        payload: extractedObject,
+      });
+    });
 };

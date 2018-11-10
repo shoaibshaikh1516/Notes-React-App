@@ -23,6 +23,12 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  //WARNING! To be deprecated in React v17. Use new lifecycle static getDerivedStateFromProps instead.
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -44,11 +50,8 @@ class Register extends Component {
   render() {
     const { errors } = this.state;
 
-    const { user } = this.props.auth; //this is coming from redux
-
     return (
       <div className="register">
-        {user ? user.name : null}
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -154,9 +157,10 @@ class Register extends Component {
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
-const mapstateToProps = state => ({ auth: state.auth }); // so what this does is it states value in auth so we can acces it by using// this.props.auth.user  or this.props.auth.isAuthenticated
+const mapstateToProps = state => ({ auth: state.auth, errors: state.errors }); // so what this does is it states value in auth so we can acces it by using// this.props.auth.user  or this.props.auth.isAuthenticated
 
 export default connect(
   mapstateToProps,

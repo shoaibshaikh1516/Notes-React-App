@@ -9,4 +9,4 @@ export const DELETE_NOTE = 'DELETE_NOTE';
 export const ADD_NOTE = 'ADD_NOTE';
 export const GET_NOTE = 'GET_NOTE';
 export const UPDATE_NOTE = 'UPDATE_NOTE';
-export const TEST_DISPATCH = 'TEST_DISPATCH';
+export const GET_ERRORS = 'GET_ERRORS';

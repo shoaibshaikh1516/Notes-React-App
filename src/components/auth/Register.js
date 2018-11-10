@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import { withRouter } from 'react-router-dom';
 import { registerUser } from '../../actions/authActions';
 
 class Register extends Component {
@@ -15,7 +15,7 @@ class Register extends Component {
       email: '',
       password: '',
       passwordConfirmation: '',
-      // role: '',
+      role: '1',
       errors: {},
     };
 
@@ -42,9 +42,10 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password,
       passwordConfirmation: this.state.passwordConfirmation,
+      role: this.state.role,
     };
 
-    this.props.registerUser(newUser);
+    this.props.registerUser(newUser, this.props.history);
   }
 
   render() {
@@ -165,4 +166,4 @@ const mapstateToProps = state => ({ auth: state.auth, errors: state.errors }); /
 export default connect(
   mapstateToProps,
   { registerUser }
-)(Register);
+)(withRouter(Register));

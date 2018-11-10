@@ -48,7 +48,7 @@ class Login extends Component {
     e.preventDefault();
 
     const userData = {
-      email: this.state.email,
+      username: this.state.username,
       password: this.state.password,
     };
 

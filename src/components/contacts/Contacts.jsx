@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 
 import { getContacts } from '../../actions/contactActions';
 
+import isEmpty from '../../validation/is-empty';
+
 class Contacts extends Component {
   componentDidMount = () => {
     this.props.getContacts();
@@ -13,16 +15,26 @@ class Contacts extends Component {
 
   render() {
     const { contacts } = this.props;
-    return (
-      <React.Fragment>
-        <h1 className="display-4 mb-2">
-          <span className="text-danger">Contact</span> List
-        </h1>
-        {contacts.map(contact => (
-          <Contact key={contact.id} contact={contact} />
-        ))}
-      </React.Fragment>
-    );
+
+    let contactsContent;
+    if (isEmpty(contacts)) {
+      console.log('spinner');
+
+      contactsContent = <h4>loading....</h4>;
+    } else {
+      contactsContent = (
+        <React.Fragment>
+          <h1 className="display-4 mb-2">
+            <span className="text-danger">Contact</span> List
+          </h1>
+
+          {contacts.map(contact => (
+            <Contact key={contact.id} contact={contact} />
+          ))}
+        </React.Fragment>
+      );
+    }
+    return <React.Fragment> {contactsContent}</React.Fragment>;
   }
 }
 

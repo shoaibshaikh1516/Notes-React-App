@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TextInputGroup from '../layout/TextInputGroup';
 import PropTypes from 'prop-types';
 import { Editor } from '@tinymce/tinymce-react';
-import JsxParser from 'react-jsx-parser';
+// import JsxParser from 'react-jsx-parser';
 import { connect } from 'react-redux';
 import { getNote, updateNote } from '../../actions/noteActions';
 class EditNote extends Component {

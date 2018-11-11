@@ -15,18 +15,14 @@ class Header extends Component {
     const authLinks = (
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
-          <a
-            href=""
-            onClick={this.onLogoutClick.bind(this)}
-            className="nav-link"
-          >
-            Logout
-          </a>
+          <Link to="/notes" className="nav-link">
+            <i className="far fa-sticky-note" /> Notes
+          </Link>
         </li>
 
         <li className="nav-item">
-          <Link to="/notes" className="nav-link">
-            <i className="far fa-sticky-note" /> Notes
+          <Link to="/contact" className="nav-link">
+            <i className="far fa-address-book" /> Contact
           </Link>
         </li>
 
@@ -45,6 +41,16 @@ class Header extends Component {
             <i className="fas fa-users" />
             About
           </Link>
+        </li>
+
+        <li className="nav-item">
+          <a
+            href=""
+            onClick={this.onLogoutClick.bind(this)}
+            className="nav-link"
+          >
+            Logout
+          </a>
         </li>
       </ul>
     );
@@ -83,11 +89,6 @@ class Header extends Component {
           </Link>
           <div>
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link to="/contact" className="nav-link">
-                  <i className="far fa-address-book" /> Contact
-                </Link>
-              </li>
               {isAuthenticated ? authLinks : guestLinks}
             </ul>
           </div>

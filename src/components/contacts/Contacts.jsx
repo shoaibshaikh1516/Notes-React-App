@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import Contact from './Contact';
-
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { getContacts } from '../../actions/contactActions';
-
 import isEmpty from '../../validation/is-empty';
+import Spinner from '../common/spinner';
 
 class Contacts extends Component {
   componentDidMount = () => {
@@ -18,9 +16,7 @@ class Contacts extends Component {
 
     let contactsContent;
     if (isEmpty(contacts)) {
-      console.log('spinner');
-
-      contactsContent = <h4>loading....</h4>;
+      contactsContent = <Spinner />;
     } else {
       contactsContent = (
         <React.Fragment>

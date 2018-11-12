@@ -6,6 +6,7 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 
 import './App.css';
 import Contacts from './components/contacts/Contacts';
+import PayTm from './components/payment/PayTm';
 import Notes from './components/notes/Notes';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -18,6 +19,7 @@ import AddNote from './components/notes/AddNote';
 import EditContact from './components/contacts/EditContact';
 import EditNote from './components/notes/EditNote';
 import Test from './components/test/Test';
+
 // import SignUpBn from './components/pages/SignUpBn';
 import { Provider } from 'react-redux';
 // import NewLogin from './components/login/NewLogin';
@@ -55,7 +57,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/contact" component={Contacts} />
-                <Route exact path="/pay" component={Contacts} />
+                <Route exact path="/pay" component={PayTm} />
                 {/* <Route exact path="/login" component={NewLogin} /> */}
                 <Route exact path="/login" component={Login} />
                 {/* <Route exact path="/signup" component={SignUpBn} /> */}

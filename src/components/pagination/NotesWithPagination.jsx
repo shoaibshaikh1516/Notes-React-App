@@ -29,6 +29,7 @@ class NotesWithPagination extends Component {
   handlePaginationChange = (e, { activePage}) => {
     console.log("activePage", e);
     // this.props.updateNotesWithPG(activePage);
+    this.setState({ activePage });
     this.props.getNotesWithPagination(activePage);
   };
 
@@ -95,8 +96,8 @@ class NotesWithPagination extends Component {
                       totalPages={totalPages}
                       // Heads up! All items are powered by shorthands, if you want to hide one of them, just pass `null` as value
                       ellipsisItem={true ? undefined : null}
-                      firstItem={first ? undefined : null}
-                      lastItem={last ? undefined : null}
+                      firstItem={true ? undefined : null}
+                      lastItem={true ? undefined : null}
                       prevItem={true ? undefined : null}
                       nextItem={true ? undefined : null}
                     />

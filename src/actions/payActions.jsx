@@ -1,7 +1,6 @@
 // import { GET_ERRORS, GET_PAYMENT_REQUEST } from './types';
-import axios from 'axios';
-import Redirect from '../components/payment/Redirect';
-import React from 'react';
+// import axios from 'axios';
+// import React from 'react';
 
 // import { Route } from 'react-router-dom';
 

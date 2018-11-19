@@ -6,14 +6,16 @@ import { getContacts } from '../../actions/contactActions';
 import isEmpty from '../../validation/is-empty';
 import Spinner from '../common/spinner';
 
+
 class Contacts extends Component {
   componentDidMount = () => {
     this.props.getContacts();
+    console.log(' componentDidMount() Contacts');
   };
 
   render() {
     const { contacts } = this.props;
-
+    console.log(' this.props');
     let contactsContent;
     if (isEmpty(contacts)) {
       contactsContent = <Spinner />;

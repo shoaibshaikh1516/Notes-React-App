@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import JsxParser from 'react-jsx-parser';
+
 import { connect } from 'react-redux';
 import { deleteNote } from '../../actions/noteActions';
 

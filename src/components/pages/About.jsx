@@ -1,6 +1,8 @@
 import React from 'react';
 // import Login from './Login';
 // import JsxParser from 'react-jsx-parser';
+
+import NotesWithPagination from '../pagination/NotesWithPagination';
 export default props => {
   return (
     <div>
@@ -33,6 +35,8 @@ export default props => {
         science. Each member of our team is highly energetic and committed to
         helping our clients achieve their goals."
       /> */}
+
+      <NotesWithPagination />
 
       <p className="text-secondary">Version 1.0.0</p>
       {/* <Login /> */}

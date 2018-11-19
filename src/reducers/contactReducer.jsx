@@ -12,7 +12,9 @@ const initialState = {
   contact: {},
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
+  console.log(' Contact reducer in Reducer');
+
   switch (action.type) {
     case GET_CONTACTS:
       return {
@@ -40,11 +42,10 @@ export default function(state = initialState, action) {
     case UPDATE_CONTACT:
       return {
         ...state,
-        contacts: state.contacts.map(
-          contact =>
-            contact.id === action.payload.id
-              ? (contact = action.payload)
-              : contact
+        contacts: state.contacts.map(contact =>
+          contact.id === action.payload.id
+            ? (contact = action.payload)
+            : contact
         ),
       };
     default:

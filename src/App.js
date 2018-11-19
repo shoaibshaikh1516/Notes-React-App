@@ -72,7 +72,6 @@ class App extends Component {
                 <Route exact path="/note/add" component={AddNote} />
               </Switch>
             </div>
-
             <Footer />
           </div>
         </Router>

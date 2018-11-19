@@ -1,0 +1,13 @@
+.no-right-padding {
+  padding-right: 1% !important;
+  text-align: right;
+}
+
+.link-style {
+  color: black;
+}
+
+.link-style:hover {
+  color: #6a5acd;
+  text-decoration: none;
+}

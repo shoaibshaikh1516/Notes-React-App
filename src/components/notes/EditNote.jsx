@@ -5,6 +5,9 @@ import { Editor } from '@tinymce/tinymce-react';
 // import JsxParser from 'react-jsx-parser';
 import { connect } from 'react-redux';
 import { getNote, updateNote } from '../../actions/noteActions';
+import isEmpty from '../../validation/is-empty';
+import Spinner from '../common/spinner';
+
 class EditNote extends Component {
   state = {
     title: '',
@@ -73,10 +76,12 @@ class EditNote extends Component {
   render() {
     const { title, body, userid, errors } = this.state;
 
-    return (
-      <div className="card mb-3">
-        <div className="card-header">Edit Note</div>
-        <div className="card-body">
+    let contactsContent;
+    if (isEmpty(this.state)) {
+      contactsContent = <Spinner />;
+    } else {
+      contactsContent = (
+        <React.Fragment>
           <form onSubmit={this.onSubmit}>
             <TextInputGroup
               label="Title"
@@ -117,7 +122,14 @@ class EditNote extends Component {
               className="btn btn-light btn-block"
             />
           </form>
-        </div>
+        </React.Fragment>
+      );
+    }
+
+    return (
+      <div className="card mb-3">
+        <div className="card-header">Edit Note</div>
+        <div className="card-body">{contactsContent}</div>
       </div>
     );
   }

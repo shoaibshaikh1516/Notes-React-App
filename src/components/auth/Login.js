@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import classnames from "classnames";
+// import classnames from "classnames";
 import TextInputGroup from "../../components/layout/TextInputGroup";
 
 import { loginUser } from "../../actions/authActions";
@@ -75,7 +75,7 @@ class Login extends Component {
               
               <TextInputGroup
                   placeholder="email"
-                  name="username"    //should be same as
+                  name="username"    //should be same as value
                   type="email"
                   value={this.state.username}   //value
                   onChange={this.onChange}

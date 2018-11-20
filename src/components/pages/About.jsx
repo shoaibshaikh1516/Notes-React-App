@@ -2,6 +2,8 @@ import React from 'react';
 // import Login from './Login';
 // import JsxParser from 'react-jsx-parser';
 
+import TableExampleSortable from "../pagination/paginationWithSort/TableExampleSortable"
+
 import NotesWithPagination from '../pagination/NotesWithPagination';
 export default props => {
   return (
@@ -36,8 +38,9 @@ export default props => {
         helping our clients achieve their goals."
       /> */}
 
-      <NotesWithPagination />
+      {/* <NotesWithPagination /> */}
 
+      <TableExampleSortable></TableExampleSortable>
       <p className="text-secondary">Version 1.0.0</p>
       {/* <Login /> */}
     </div>

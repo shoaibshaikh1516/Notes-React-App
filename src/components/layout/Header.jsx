@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 
+
 class Header extends Component {
   onLogoutClick(e) {
     e.preventDefault();
@@ -17,6 +18,11 @@ class Header extends Component {
         <li className="nav-item">
           <Link to="/notes" className="nav-link">
             <i className="far fa-sticky-note" /> Notes
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/notespg" className="nav-link">
+            <i className="far fa-sticky-note" /> Notes Pagination
           </Link>
         </li>
 

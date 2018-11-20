@@ -19,6 +19,7 @@ import AddNote from './components/notes/AddNote';
 import EditContact from './components/contacts/EditContact';
 import EditNote from './components/notes/EditNote';
 import Test from './components/test/Test';
+import NotesWithPagination from './components/pagination/NotesWithPagination';
 
 // import SignUpBn from './components/pages/SignUpBn';
 import { Provider } from 'react-redux';
@@ -62,8 +63,9 @@ class App extends Component {
                 <Route exact path="/login" component={Login} />
                 {/* <Route exact path="/signup" component={SignUpBn} /> */}
                 <Route exact path="/signup" component={Register} />
-                <Route exact path="/notes" component={Notes} />
                 <Route exact path="/login" component={Notes} />
+                <Route exact path="/notes" component={Notes} />
+                <Route exact path="/notespg" component={NotesWithPagination} />
                 <Route exact path="/contact/add" component={AddContact} />
                 <Route exact path="/contact/edit/:id" component={EditContact} />
                 <Route exact path="/note/edit/:noteid" component={EditNote} />

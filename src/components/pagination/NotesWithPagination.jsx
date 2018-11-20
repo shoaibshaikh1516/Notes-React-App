@@ -22,8 +22,7 @@ class NotesWithPagination extends Component {
   };
 
   // handleCheckboxChange = (e, { checked, name }) =>
-  //   this.setState({ [name]: checked });
-
+  // this.setState({ [name]: checked });
   // handleInputChange = (e, { name, value }) => this.setState({ [name]: value });
 
   handlePaginationChange = (e, { activePage}) => {
@@ -32,7 +31,6 @@ class NotesWithPagination extends Component {
     this.setState({ activePage });
     this.props.getNotesWithPagination(activePage);
   };
-
 
   // UNSAFE_componentWillReceiveProps(nextProps, nextState) {
   //   //deprecated

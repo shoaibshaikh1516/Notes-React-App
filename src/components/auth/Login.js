@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import classnames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import TextInputGroup from "../../components/layout/TextInputGroup";
 
-import { loginUser } from '../../actions/authActions';
+import { loginUser } from "../../actions/authActions";
 class Login extends Component {
   constructor() {
     super();
     this.state = {
       username: '',
       password: '',
-      errors: {},
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -19,13 +20,13 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/notes');
+      this.props.history.push("/notes");
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/notes');
+      this.props.history.push("/notes");
     }
 
     if (nextProps.errors) {
@@ -40,7 +41,7 @@ class Login extends Component {
     // logErrorToMyService(error, info);
 
     console.log(error);
-    console.log(info + 'snmks,');
+    console.log(info + "snmks,");
   }
 
   onSubmit(e) {
@@ -48,7 +49,7 @@ class Login extends Component {
 
     const userData = {
       username: this.state.username,
-      password: this.state.password,
+      password: this.state.password
     };
 
     this.props.loginUser(userData);
@@ -61,7 +62,7 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
 
-    console.log('render', errors.description);
+    console.log("render", errors.description);
 
     return (
       <div className="login">
@@ -71,33 +72,24 @@ class Login extends Component {
               <h1 className="display-4 text-center">Log In</h1>
               <p className="lead text-center">Sign in to your JOTer account</p>
               <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    className={classnames('form-control form-control-lg', {
-                      'is-invalid': errors.description,
-                    })}
-                    placeholder="Email Address"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className={classnames('form-control form-control-lg', {
-                      'is-invalid': errors.description,
-                    })}
-                    placeholder="Password"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChange}
-                  />
-                  {errors.description && (
-                    <div className="invalid-feedback">{errors.description}</div>
-                  )}
-                </div>
+              
+              <TextInputGroup
+                  placeholder="email"
+                  name="username"    //should be same as
+                  type="email"
+                  value={this.state.username}   //value
+                  onChange={this.onChange}
+                  error={errors.username}
+                />
+
+                <TextInputGroup
+                  placeholder="Password"
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.onChange}
+                  error={errors.description}
+                />
 
                 <input
                   type="submit"
@@ -115,12 +107,12 @@ class Login extends Component {
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors,
+  errors: state.errors
 });
 
 export default connect(

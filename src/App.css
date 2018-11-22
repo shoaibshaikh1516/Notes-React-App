@@ -37,3 +37,11 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+.no-top-margin{
+  margin-top:0;
+}
+
+.ui.card {
+  margin: 1em 2em !important;
+}

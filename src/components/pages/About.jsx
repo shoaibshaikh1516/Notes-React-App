@@ -1,10 +1,13 @@
 import React from 'react';
 // import Login from './Login';
 // import JsxParser from 'react-jsx-parser';
-
 import TableExampleSortable from "../pagination/paginationWithSort/TableExampleSortable"
-
+import ProductDetails from "../product/ProductDetails"
 import NotesWithPagination from '../pagination/NotesWithPagination';
+
+import "../../App.css"
+
+import "./About.css"
 export default props => {
   return (
     <div>
@@ -39,10 +42,17 @@ export default props => {
       /> */}
 
       {/* <NotesWithPagination /> */}
+      <div className="flex " >
+        <ProductDetails header="Basic" metadata="0$/" description=" Access the Account" noOfUser="1 User"></ProductDetails>
+        <ProductDetails header="Premium" metadata="Joined in 2016" description=" Take notes" noOfUser="Less then 5"></ProductDetails>
+        <ProductDetails header="Enterprise" metadata="Joined in 2016" description=" Over all access" noOfUser="More the 5 Users"></ProductDetails>
+      </div>
 
-      <TableExampleSortable></TableExampleSortable>
-      <p className="text-secondary">Version 1.0.0</p>
+      {/* <TableExampleSortable></TableExampleSortable> */}
+      {/* <p className="text-secondary">Version 1.0.0</p> */}
       {/* <Login /> */}
+
+
     </div>
   );
 };

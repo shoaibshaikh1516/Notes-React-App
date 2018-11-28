@@ -12,7 +12,7 @@ import axios from 'axios';
 // };
 
 
-export const getNotesWithPagination = (page=1, size=10,direction="DESC",sort="noteid") => async dispatch => {
+export const getNotesWithPagination = (page=1, size=10,direction="ASC",sort="noteid") => async dispatch => {
   console.log("this is page, size", page, size);
   page=page-1;
   const res = await axios.get(
@@ -22,8 +22,7 @@ export const getNotesWithPagination = (page=1, size=10,direction="DESC",sort="no
   dispatch({ type: GET_NOTES_USING_PAGINATION, payload: res.data });
 };
 
-
-export const getNotesWithSorting = (page=1, size=10,direction="DESC",sort="noteid") => async dispatch => {
+export const getNotesWithSorting = (page=1, size=10,direction="ASC",sort="noteid") => async dispatch => {
   console.log("this is page, size", page, size);
   page=page-1;
 

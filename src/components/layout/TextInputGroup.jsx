@@ -11,7 +11,7 @@ const TextInputGroup = ({
   info,
   type,
   onChange,
-  disabled
+  disabled,required
 }) => {
   return (
     <div className="form-group">
@@ -20,6 +20,7 @@ const TextInputGroup = ({
       className={classnames('form-control form-control-lg', {
         'is-invalid': error,
       })}
+      required={required}
       placeholder={placeholder}
       name={name}
       value={value}

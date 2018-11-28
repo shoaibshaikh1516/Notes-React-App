@@ -21,10 +21,6 @@ class NotesWithPagination extends Component {
     console.log("Component did mount ", this.props);
   };
 
-  // handleCheckboxChange = (e, { checked, name }) =>
-  // this.setState({ [name]: checked });
-  // handleInputChange = (e, { name, value }) => this.setState({ [name]: value });
-
   handlePaginationChange = (e, { activePage}) => {
     console.log("activePage", e);
     // this.props.updateNotesWithPG(activePage);
@@ -32,14 +28,6 @@ class NotesWithPagination extends Component {
     this.props.getNotesWithPagination(activePage);
   };
 
-  // UNSAFE_componentWillReceiveProps(nextProps, nextState) {
-  //   //deprecated
-  //   const { number, totalPages, size } = nextProps.notespg;
-  //   console.log("activePage", number, totalPages, size );
-  //   this.setState({ number, totalPages, size });
-
-  //   // this.setState({ activePage: number });
-  // }
 
   render() {
     const { content, totalPages, size, number, last, first } = this.props.notespg;
@@ -62,7 +50,7 @@ class NotesWithPagination extends Component {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Note Id</Table.HeaderCell>
+              <Table.HeaderCell >Note Id</Table.HeaderCell>
               <Table.HeaderCell>Title</Table.HeaderCell>
               {/* <Table.HeaderCell>Body</Table.HeaderCell>  */}
             </Table.Row>

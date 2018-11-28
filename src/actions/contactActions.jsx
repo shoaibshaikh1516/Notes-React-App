@@ -27,10 +27,12 @@ export const getContact = id => async dispatch => {
 
 
 
-export const deleteContact = id => async dispatch => {
+export const  deleteContact = id => async dispatch => {
   try {
     await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
     dispatch({ type: DELETE_CONTACT, payload: id }); //for  jsonplaceholder only
+
+      
   } catch (e) {
     dispatch({ type: DELETE_CONTACT, payload: id }); //for  jsonplaceholder only
   }

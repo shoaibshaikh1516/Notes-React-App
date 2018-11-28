@@ -62,7 +62,7 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
 
-    console.log("render", errors.description);
+    console.log("render", errors.description); 
 
     return (
       <div className="login">
@@ -86,6 +86,7 @@ class Login extends Component {
                   placeholder="Password"
                   name="password"
                   type="password"
+                  required="true"
                   value={this.state.password}
                   onChange={this.onChange}
                   error={errors.description}

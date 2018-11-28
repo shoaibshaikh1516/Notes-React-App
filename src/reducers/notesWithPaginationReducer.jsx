@@ -1,5 +1,6 @@
 import {
   GET_NOTES_USING_PAGINATION,
+  GET_NOTES_USING_SORTING
   // UPDATE_NOTES_USING_PAGINATION
 } from "../actions/types";
 //same as Context file used previously
@@ -30,6 +31,17 @@ export default function(state = initialState, action) {
     //     notespg: action.payload
       
     //   };
+
+
+    case GET_NOTES_USING_SORTING:
+    console.log("state", state);
+    console.log("action.payload", action.payload);
+
+    return {
+      ...state,
+      notespg: action.payload
+    };
+
     default:
       return state;
   }

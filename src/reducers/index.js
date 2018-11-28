@@ -11,4 +11,5 @@ export default combineReducers({
   auth: authReducer,
   errors: errorReducer,
   notesWith: notesWithPaginationReducer,
+ 
 });

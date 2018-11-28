@@ -1,6 +1,10 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { Table } from 'semantic-ui-react'
+import { connect } from "react-redux";
+// import { getNotesWithSorting} from "../../actions/notesWithPaginationActions";
+import { getNotesWithSorting } from "../../../actions/notesWithPaginationActions";
+import NotesWithPaginationChild from "../../pagination/NotesWithPaginationChild";
 
 const tableData = [
   { name: 'John', age: 15, gender: 'Male' },
@@ -9,72 +13,86 @@ const tableData = [
   { name: 'Ben', age: 70, gender: 'Male' },
 ]
 
-export default class TableExampleSortable extends Component {
+class TableExampleSortable extends Component {
   state = {
     column: null,
-    data: tableData,
+    data: null,
     direction: null,
   }
+
+  componentDidMount = () => {
+    this.props.getNotesWithSorting();
+    console.log("Component did mount ", this.props);
+  };
 
   handleSort = clickedColumn => () => {
     const { column, data, direction } = this.state
 
-
-    console.log("Loading...");
-    
     if (column !== clickedColumn) {
       this.setState({
         column: clickedColumn,
-        data: _.sortBy(data, [clickedColumn]),
+        // data: _.sortBy(data, [clickedColumn]),
         direction: 'ascending',
       })
+
+      console.log("getNotesWithSorting did mount ", this.props.notesorting);
+      this.props.getNotesWithSorting(undefined,undefined,direction, clickedColumn);
+      console.log("getNotesWithSorting did mount ", direction, clickedColumn);
 
       return
     }
 
+
     this.setState({
-      data: data.reverse(),
+      // data: data.reverse(),
       direction: direction === 'ascending' ? 'descending' : 'ascending',
     })
+
+    this.props.getNotesWithSorting(undefined,undefined,direction, clickedColumn);
+    console.log("getNotesWithSorting did mount ", direction, clickedColumn);
+
   }
 
   render() {
+
     const { column, data, direction } = this.state
+    const { content, totalPages, size, number, last, first } = this.props.notesorting;
 
     return (
       <Table sortable celled fixed>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell
-              sorted={column === 'name' ? direction : null}
-              onClick={this.handleSort('name')}
+              sorted={column === 'noteid' ? direction : null}
+              onClick={this.handleSort('noteid')}
             >
               Name
             </Table.HeaderCell>
             <Table.HeaderCell
-              sorted={column === 'age' ? direction : null}
-              onClick={this.handleSort('age')}
+              sorted={column === 'body' ? direction : null}
+              onClick={this.handleSort('body')}
             >
               Age
             </Table.HeaderCell>
-            <Table.HeaderCell
-              sorted={column === 'gender' ? direction : null}
-              onClick={this.handleSort('gender')}
-            >
-              Gender
-            </Table.HeaderCell>
+      
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {_.map(data, ({ age, gender, name }) => (
-            <Table.Row key={name}>
-              <Table.Cell>{name}</Table.Cell>
-              <Table.Cell>{age}</Table.Cell>
-              <Table.Cell>{gender}</Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
+            {content
+              ? content.map(con => (
+                  <NotesWithPaginationChild key={con.noteid} contents={con} />
+                ))
+              : null}
+          </Table.Body>
       </Table>
     )
   }
 }
+
+
+const mapStateToProps = state => ({ notesorting: state.notesWith.notespg });
+
+export default connect(
+  mapStateToProps,
+  { getNotesWithSorting }
+)(TableExampleSortable);

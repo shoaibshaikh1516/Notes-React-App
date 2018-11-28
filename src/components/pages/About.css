@@ -1,3 +1,8 @@
 .flex{
     display: flex;
 }
+
+
+.text-style{
+    text-decoration: line-through;
+}
